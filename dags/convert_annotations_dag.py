@@ -2,6 +2,7 @@ from airflow import DAG
 from airflow.operators.python_operator import PythonOperator
 import os
 import json
+from datetime import *
 
 def convert_annotations_to_yolov7(annotation_path, image_path, output_dir):
     with open(annotation_path, 'r') as f:
@@ -35,9 +36,9 @@ default_args = {
 }
 
 with DAG('convert_annotations', default_args=default_args, schedule_interval=None) as dag:
-    train_dir = 'path/to/train/folder'
-    val_dir = 'path/to/val/folder'
-    output_dir = 'path/to/output/folder'
+    train_dir = '/Users/alexegorov/skud/dataset/train'
+    val_dir = '/Users/alexegorov/skud/dataset/val'
+    output_dir = '/Users/alexegorov/skud/dataset/convert'
     convert_annotations_task = PythonOperator(
         task_id='convert_annotations',
         python_callable=convert_annotations,

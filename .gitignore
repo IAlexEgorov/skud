@@ -1,0 +1,8 @@
+/datasets/
+datasets/*
+*.pt
+yolov7-main/
+runs/
+
+/.DS_Store
+__pycache__/

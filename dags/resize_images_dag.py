@@ -38,8 +38,8 @@ default_args = {
 }
 
 with DAG('resize_images_annotations', default_args=default_args, schedule_interval=None) as dag:
-    train_dir = 'path/to/train/folder'
-    val_dir = 'path/to/val/folder'
+    train_dir = '/Users/alexegorov/skud/data/train'
+    val_dir = '/Users/alexegorov/skud/data/val'
     target_size = (640, 640)
     resize_task = PythonOperator(
         task_id='resize_images_annotations',

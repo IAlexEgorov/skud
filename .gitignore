@@ -3,3 +3,5 @@ best_2.pt
 crowdhuman_yolov5m.pt
 yolov5s.onnx
 yolov5s.pt
+.idea/
+.DS_Store

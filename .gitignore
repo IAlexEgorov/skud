@@ -1,8 +1,5 @@
-/datasets/
-datasets/*
-*.pt
-yolov7-main/
-runs/
-
-/.DS_Store
-__pycache__/
+ultralytics-main/
+best_2.pt
+crowdhuman_yolov5m.pt
+yolov5s.onnx
+yolov5s.pt

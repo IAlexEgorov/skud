@@ -1,6 +1,0 @@
-path: datasets/crowdhuman
-train: datasets/crowdhuman/images/train
-val: datasets/crowdhuman/images/val
-
-nc: 1
-names: ['person']

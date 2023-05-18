@@ -36,6 +36,9 @@ def image_resize(image, width, height, inter=cv2.INTER_AREA):
     return resized
 
 
+MODEL_PATH = "/Users/alexegorov/skud/"
+
+
 model = torch.hub.load('ultralytics/yolov5', 'yolov5s')
 
 # Создание объекта KalmanFilter
@@ -45,6 +48,13 @@ kf.H = np.array([[1, 0, 0, 0], [0, 1, 0, 0]])
 kf.R *= np.array([[1, 1], [1, 1]])
 
 cap = cv2.VideoCapture(0)
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
+
+# Задаем параметры для сохранения видео
+frame_width = int(cap.get(3))
+frame_height = int(cap.get(4))
+out = cv2.VideoWriter('outpy.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 
 while True:
     ret, frame = cap.read()
@@ -64,11 +74,17 @@ while True:
             kf.predict()
             kf.update([x_center, y_center])
             x, y = kf.x[0:2]
-            cv2.rectangle(resize_image, (x_min, y_min), (x_max, y_max), (0, 255, 0), 2)
+            cv2.rectangle(resize_image, (x_min + 10, y_min + 10), (x_max - 10, y_max - 10), (0, 255, 0), 2)
 
+    result.save()
     cv2.imshow("Frame", resize_image)
+
+    # Сохранение в файл
+    out.write(resize_image)
+
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cap.release()
+out.release()
 cv2.destroyAllWindows()
